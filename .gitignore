@@ -1,1 +1,28 @@
-conformance/node_modules/
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+*.tsbuildinfo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor / IDE
+.vscode/
+.idea/
+*.swp
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary
+*.tmp
+
+# Generated files in memnex-spec-js package
+# (synced from repo root via scripts/sync-spec.mjs)
+packages/memnex-spec-js/spec/meeting-output.schema.json
+packages/memnex-spec-js/spec/examples/
+packages/memnex-spec-js/LICENSE
