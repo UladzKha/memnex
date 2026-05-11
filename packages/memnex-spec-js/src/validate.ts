@@ -61,7 +61,7 @@ export function isValid(data: unknown): data is MeetingOutput {
 
 function toValidationError(err: ErrorObject): ValidationError {
     return {
-        path: err.instancePath || "/",
+        path: err.instancePath,
         message: err.message ?? "validation failed",
         keyword: err.keyword,
     };

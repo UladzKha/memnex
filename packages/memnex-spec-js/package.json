@@ -29,13 +29,13 @@
         "spec",
         "README.md",
         "LICENSE",
+        "CHANGELOG.md",
         "dist"
     ],
     "exports": {
         ".": {
             "types": "./dist/index.d.ts",
-            "import": "./dist/index.js",
-            "default": "./spec/meeting-output.schema.json"
+            "import": "./dist/index.js"
         },
         "./types": {
             "types": "./dist/types.d.ts"
@@ -60,7 +60,7 @@
         "prepublishOnly": "npm run build"
     },
     "engines": {
-        "node": ">=20"
+        "node": ">=20.10.0"
     },
     "devDependencies": {
         "@types/node": "^22.0.0",

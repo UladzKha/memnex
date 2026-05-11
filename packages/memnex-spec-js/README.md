@@ -36,19 +36,30 @@ if (isValid(data)) {
 }
 ```
 
-## Subpath exports
+## Accessing the raw schema and examples
+
+The validator and types are the primary API. If you need direct
+access to the raw JSON Schema document or the example payloads
+(e.g. for code generation, schema browsers, or custom validators),
+use:
 
 ```typescript
-// Raw JSON Schema
-import schema from "memnex-spec/schema";
-
-// Example meeting outputs
-import minimal from "memnex-spec/examples/minimal";
-import full from "memnex-spec/examples/full";
-
-// Types only (no runtime dependency)
-import type { MeetingOutput } from "memnex-spec/types";
+import { schema } from "memnex-spec";
+// schema is the JSON Schema 2020-12 document
 ```
+
+The package also exposes JSON files as subpath exports for tooling
+that understands JSON modules (bundlers, schema browsers):
+
+- `memnex-spec/schema` — raw JSON Schema document
+- `memnex-spec/examples/minimal` — minimal valid example
+- `memnex-spec/examples/full` — full example with all optional fields
+- `memnex-spec/types` — TypeScript types only (no runtime)
+
+Direct ESM imports of JSON subpaths require Node's import attributes
+syntax: `import x from "memnex-spec/schema" with { type: "json" }`.
+Most consumers will not need this; use `import { schema } from
+"memnex-spec"` instead.
 
 ## What is memnex?
 
