@@ -1,0 +1,72 @@
+{
+    "name": "memnex-spec",
+    "type": "module",
+    "version": "0.1.0",
+    "description": "Reference JavaScript/TypeScript implementation of the memnex specification — an open standard for portable meeting outputs (transcripts, summaries, action items, decisions).",
+    "license": "MIT",
+    "author": "Uladz Kha <UladzKha@users.noreply.github.com>",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/UladzKha/memnex.git",
+        "directory": "packages/memnex-spec-js"
+    },
+    "homepage": "https://github.com/UladzKha/memnex/tree/main/packages/memnex-spec-js#readme",
+    "bugs": {
+        "url": "https://github.com/UladzKha/memnex/issues"
+    },
+    "keywords": [
+        "memnex",
+        "json-schema",
+        "meeting",
+        "transcript",
+        "interoperability",
+        "open-standard",
+        "open-specification",
+        "local-first",
+        "provenance"
+    ],
+    "files": [
+        "spec",
+        "README.md",
+        "LICENSE",
+        "dist"
+    ],
+    "exports": {
+        ".": {
+            "types": "./dist/index.d.ts",
+            "import": "./dist/index.js",
+            "default": "./spec/meeting-output.schema.json"
+        },
+        "./types": {
+            "types": "./dist/types.d.ts"
+        },
+        "./schema": {
+            "default": "./spec/meeting-output.schema.json"
+        },
+        "./examples/minimal": {
+            "default": "./spec/examples/minimal.json"
+        },
+        "./examples/full": {
+            "default": "./spec/examples/full.json"
+        }
+    },
+    "scripts": {
+        "build:types": "node scripts/build-types.mjs",
+        "build:js": "tsc",
+        "build": "npm run build:types && npm run build:js",
+        "typecheck": "tsc --noEmit -p tsconfig.scripts.json",
+        "prepublishOnly": "npm run build"
+    },
+    "engines": {
+        "node": ">=20"
+    },
+    "devDependencies": {
+        "@types/node": "^22.0.0",
+        "json-schema-to-typescript": "^15.0.4",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "ajv": "^8.20.0",
+        "ajv-formats": "^3.0.1"
+    }
+}
