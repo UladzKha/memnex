@@ -13,5 +13,9 @@ from its first reference implementation and prepared for public draft release.
 
 ## License
 
-- Specification documents: CC0 1.0 (public domain dedication)
-- Reference code: MIT
+This repository uses a dual-license model:
+
+- **Specification documents** (`SPEC.md`, schema files in `schema/`, examples in `examples/`) are dedicated to the public domain under [CC0 1.0](./LICENSE-SPEC).
+- **Reference code** (validators, type definitions, test runners) is licensed under [MIT](./LICENSE-CODE).
+
+This separation exists so the specification itself can be freely adopted, copied, and re-implemented without any licensing friction, while code contributions remain attributable.
