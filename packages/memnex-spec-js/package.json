@@ -51,10 +51,12 @@
         }
     },
     "scripts": {
+        "sync-spec": "node scripts/sync-spec.mjs",
         "build:types": "node scripts/build-types.mjs",
         "build:js": "tsc",
-        "build": "npm run build:types && npm run build:js",
+        "build": "npm run sync-spec && npm run build:types && npm run build:js",
         "typecheck": "tsc --noEmit -p tsconfig.scripts.json",
+        "prepack": "npm run build",
         "prepublishOnly": "npm run build"
     },
     "engines": {
