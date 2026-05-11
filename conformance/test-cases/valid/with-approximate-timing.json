@@ -1,0 +1,41 @@
+{
+  "schema_version": "0.1.0",
+  "meeting_id": "01JXPQ5N8TRKA4MWVZD3GFBY7D",
+  "generated_at": "2026-05-11T10:00:00Z",
+  "source": {
+    "file_name": "weekly-review.wav",
+    "sha256": "d3e2f1a0b9c8d7e6f5a4b3c2d1e0f9a8b7c6d5e4f3a2b1c0d9e8f7a6b5c4d3e2",
+    "format": "wav"
+  },
+  "transcript": {
+    "language": "en",
+    "text": "Good morning. The weekly review is now in session.",
+    "segments": [
+      {
+        "id": "seg_0001",
+        "start_sec": 0.0,
+        "end_sec": 2.0,
+        "text": "Good morning.",
+        "is_approximate_timing": true
+      },
+      {
+        "id": "seg_0002",
+        "start_sec": 2.0,
+        "end_sec": 6.0,
+        "text": "The weekly review is now in session.",
+        "is_approximate_timing": true
+      }
+    ]
+  },
+  "provenance": {
+    "producer": {
+      "name": "samuraizer",
+      "version": "0.2.0"
+    },
+    "pipeline": {
+      "transcription": {
+        "engine": "vosk"
+      }
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["type"],
+  "expected_error_paths": ["/transcript/language"],
+  "description": "transcript.language must be a string; integer 42 violates the type constraint."
+}

@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["additionalProperties"],
+  "expected_error_paths": ["/source"],
+  "description": "source has additionalProperties: false; adding an unknown field 'foo' must be rejected."
+}

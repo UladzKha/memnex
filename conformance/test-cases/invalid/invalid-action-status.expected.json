@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["enum"],
+  "expected_error_paths": ["/action_items/0/status"],
+  "description": "status must be one of 'open', 'in_progress', 'done', 'cancelled'; 'blocked' is not in the enum."
+}

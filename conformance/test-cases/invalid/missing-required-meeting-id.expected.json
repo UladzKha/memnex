@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["required"],
+  "expected_error_paths": [""],
+  "description": "meeting_id is a required field; removing it must produce a required error at the document root."
+}

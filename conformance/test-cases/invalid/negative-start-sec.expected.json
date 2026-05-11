@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["minimum"],
+  "expected_error_paths": ["/transcript/segments/0/start_sec"],
+  "description": "start_sec has a minimum of 0; -1 violates this constraint."
+}

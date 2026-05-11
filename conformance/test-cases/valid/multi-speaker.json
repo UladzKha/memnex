@@ -1,0 +1,59 @@
+{
+  "schema_version": "0.1.0",
+  "meeting_id": "01JXPQ5N8TRKA4MWVZD3GFBY7E",
+  "generated_at": "2026-05-11T11:00:00Z",
+  "source": {
+    "file_name": "team-sync.mp3",
+    "sha256": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+    "format": "mp3"
+  },
+  "transcript": {
+    "language": "en",
+    "text": "Hello everyone. I wanted to discuss the deployment. Let us schedule it for Thursday.",
+    "segments": [
+      {
+        "id": "seg_0001",
+        "start_sec": 0.0,
+        "end_sec": 2.5,
+        "text": "Hello everyone.",
+        "speaker_id": "SPEAKER_00"
+      },
+      {
+        "id": "seg_0002",
+        "start_sec": 2.5,
+        "end_sec": 6.0,
+        "text": "I wanted to discuss the deployment.",
+        "speaker_id": "SPEAKER_01"
+      },
+      {
+        "id": "seg_0003",
+        "start_sec": 6.0,
+        "end_sec": 9.5,
+        "text": "Let us schedule it for Thursday.",
+        "speaker_id": "SPEAKER_00"
+      }
+    ]
+  },
+  "participants": [
+    {
+      "id": "SPEAKER_00",
+      "name": "Speaker 1"
+    },
+    {
+      "id": "SPEAKER_01",
+      "name": "Speaker 2"
+    }
+  ],
+  "provenance": {
+    "producer": {
+      "name": "samuraizer",
+      "version": "0.2.0"
+    },
+    "pipeline": {
+      "transcription": {
+        "engine": "whisper.cpp",
+        "model_name": "ggml-large-v3"
+      }
+    }
+  }
+}

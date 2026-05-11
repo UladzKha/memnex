@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["pattern"],
+  "expected_error_paths": ["/action_items/0/source_segment_ref/0"],
+  "description": "source_segment_ref items must match ^seg_[0-9]+$; 'bad_id' violates this pattern."
+}

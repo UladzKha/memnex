@@ -1,0 +1,14 @@
+{
+  "name": "memnex-conformance",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Reference conformance test runner for the memnex specification (v0.1). Not published to npm.",
+  "scripts": {
+    "test": "node runner.mjs"
+  },
+  "dependencies": {
+    "ajv": "^8.20.0",
+    "ajv-formats": "^3.0.1"
+  }
+}

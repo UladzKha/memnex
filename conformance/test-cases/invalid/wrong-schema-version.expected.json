@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["const"],
+  "expected_error_paths": ["/schema_version"],
+  "description": "schema_version is a const field fixed to '0.1.0'; any other value must fail validation."
+}

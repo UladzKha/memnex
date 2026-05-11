@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["pattern"],
+  "expected_error_paths": ["/source/sha256"],
+  "description": "source.sha256 must match ^[a-f0-9]{64}$; 'not-a-hash' violates this constraint."
+}
