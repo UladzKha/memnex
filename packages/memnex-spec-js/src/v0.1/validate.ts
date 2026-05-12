@@ -2,7 +2,7 @@ import { Ajv2020 } from "ajv/dist/2020.js";
 import { default as _addFormats } from "ajv-formats";
 import type { FormatsPlugin } from "ajv-formats";
 import type { ErrorObject } from "ajv";
-import schema from "../../spec/v0.1/meeting-output.schema.json" with { type: "json" };
+import rawSchema from "../../spec/v0.1/meeting-output.schema.json" with { type: "json" };
 import type { MeetingOutput } from "../../dist/v0.1/types.js";
 
 export type ValidationError = {
@@ -21,7 +21,7 @@ export type ValidationResult =
 const ajv = new Ajv2020({ allErrors: true, strict: true });
 (_addFormats as unknown as FormatsPlugin)(ajv);
 
-const validateFn = ajv.compile<MeetingOutput>(schema);
+const validateFn = ajv.compile<MeetingOutput>(rawSchema);
 
 /**
  * Validate an unknown value against the memnex v0.1 meeting output schema.
@@ -54,3 +54,17 @@ function toValidationError(err: ErrorObject): ValidationError {
         keyword: err.keyword,
     };
 }
+
+/**
+ * The raw v0.1 JSON Schema document, exposed as an opaque object.
+ *
+ * The explicit `Readonly<Record<string, unknown>>` annotation prevents
+ * tsc from emitting the original JSON import path into the declaration
+ * file, which would trigger TS1543 in consumers using
+ * moduleResolution: nodenext (the JSON `with { type: "json" }` import
+ * attribute is a runtime syntax that tsc strips when generating .d.ts).
+ *
+ * Consumers who need the exact schema structure can JSON.stringify and
+ * re-parse, or cast to a more specific type at the call site.
+ */
+export const schema: Readonly<Record<string, unknown>> = rawSchema;
