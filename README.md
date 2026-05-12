@@ -11,7 +11,7 @@ The [`memnex-spec`](https://www.npmjs.com/package/memnex-spec) package on npm is
 memnex `v0.2.0` is the current draft specification. `v0.1.0` remains valid and supported — v0.2 is a backward-compatible minor release; documents valid under v0.1 remain valid under v0.2. The schema is stable within each minor series; breaking changes will follow the versioning policy in [GOVERNANCE.md](./GOVERNANCE.md). See [CHANGELOG.md](./CHANGELOG.md) for the full release history.
 
 - **Specification:** see [SPEC.md](./SPEC.md), [schema/v0.1/](./schema/v0.1/), and [schema/v0.2/](./schema/v0.2/)
-- **Reference implementation:** [`memnex-spec`](https://www.npmjs.com/package/memnex-spec) on npm (currently v0.1.0; v0.2.0 release pending)
+- **Reference implementation:** [`memnex-spec`](https://www.npmjs.com/package/memnex-spec) on npm (v0.2.0)
 - **Reference adopter:** [Samuraizer](https://github.com/UladzKha/samuraizer-cli) (local-first meeting processing CLI)
 - **Conformance suites:**
   - [conformance/](./conformance/) — v0.1 (15 test cases, frozen)

@@ -3,8 +3,6 @@
 JSON Schema (Draft 2020-12) files for the memnex specification, organized by version.
 
 ## Versions
-
-## Versions
 - `v0.1/` — released May 2026 (stable within v0.1.x series)
 - `v0.2/` — released May 2026 (current, backward-compatible with v0.1)
 

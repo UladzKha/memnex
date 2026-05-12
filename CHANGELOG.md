@@ -40,7 +40,6 @@ Backward-compatible minor release. All documents valid under `0.1.0` remain vali
 ### Notes
 
 - The v0.1 conformance test suite at [`conformance/`](./conformance/) is frozen. Its README, runner behavior, test cases, and matching semantics do not change between v0.x minor releases. The v0.2 suite is published alongside it as a parallel directory.
-- `memnex-spec@0.2.0` npm package release pending.
 
 ## [0.1.0] — 2026-05-11
 
