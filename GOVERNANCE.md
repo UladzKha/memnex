@@ -2,14 +2,16 @@
 
 ## Status
 
-memnememnex v0.1 is published as a draft specification with a working reference implementation. The schema is stable within v0.1.x; breaking changes will follow the versioning policy in [GOVERNANCE.md](./GOVERNANCE.md).
+memnex v0.1 is published as a draft specification with a working reference implementation. The schema is stable within v0.1.x; breaking changes will follow the versioning policy in [GOVERNANCE.md](./GOVERNANCE.md).
 
 - **Specification:** see [SPEC.md](./SPEC.md) and [schema/v0.1/](./schema/v0.1/)
 - **Reference implementation:** [`memnex-spec`](https://www.npmjs.com/package/memnex-spec) on npm
 - **Reference adopter:** [Samuraizer](https://github.com/UladzKha/samuraizer-cli) (local-first meeting processing CLI)
 - **Conformance suite:** [conformance/](./conformance/) — 15 test cases, ajv-based reference runner
 
-Pre-v1.0 versions are experimental. Stability commitment kicks in from v1.0.0.x is currently maintained by Uladz Kha (BDFL model) as a bootstrap phase. This governance model is explicitly transitional. As adoption grows, the project intends to evolve toward a multi-stakeholder governance model, potentially under the umbrella of a neutral foundation (e.g., The Commons Conservancy, OASIS, or W3C Community Group).
+Pre-v1.0 versions are experimental. Stability commitment kicks in from v1.0.0.
+
+memnex is currently maintained by Uladz Kha (BDFL model) as a bootstrap phase. This governance model is explicitly transitional. As adoption grows, the project intends to evolve toward a multi-stakeholder governance model, potentially under the umbrella of a neutral foundation (e.g., The Commons Conservancy, OASIS, or W3C Community Group).
 
 ## Decision-making
 
