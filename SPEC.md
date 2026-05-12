@@ -1,9 +1,10 @@
 # memnex Specification
 
-**Version:** 0.1.0 (draft)
-**Schema URI:** `https://memnex.org/schema/v0.1/meeting-output.schema.json`
+**Version:** 0.2.0 (draft)
+**Schema URI:** `https://memnex.org/schema/v0.2/meeting-output.schema.json`
 **JSON Schema dialect:** Draft 2020-12
 **Status:** Draft. Field names and structure may change before `v1.0.0`. From `v1.0.0` onward, this specification commits to a 3-year no-breaking-changes window.
+**Previous versions:** [v0.1.0](https://memnex.org/schema/v0.1/meeting-output.schema.json) (superseded by v0.2.0; remains valid — see Versioning).
 **License:** This document is dedicated to the public domain under [CC0 1.0](./LICENSE-SPEC). Reference code is licensed under [MIT](./LICENSE-CODE).
 
 ## Abstract
@@ -12,7 +13,9 @@ memnex is an open specification for portable, verifiable, agent-accessible meeti
 
 ## Status of This Document
 
-This is a public draft (`v0.1.0`) of the memnex specification. It is published for community review, early implementation feedback, and incorporation into reference tooling. It is **not** a stable release. Fields, value constraints, and structural decisions may change between minor versions during the `0.x` series.
+This is a public draft (`v0.2.0`) of the memnex specification. It is published for community review, early implementation feedback, and incorporation into reference tooling. It is **not** a stable release. Fields, value constraints, and structural decisions may change between minor versions during the `0.x` series.
+
+v0.2.0 supersedes v0.1.0 with two backward-compatible additions (see Changelog). All documents valid under `v0.1.0` remain valid under `v0.2.0`. Producers and consumers conformant with v0.1.0 are not required to upgrade.
 
 A stable `v1.0.0` release is planned following implementation feedback. From `v1.0.0` onward, the specification commits to a minimum 3-year window with no breaking changes.
 
@@ -36,11 +39,19 @@ A consumer **MUST** check the `schema_version` field before parsing and **MAY** 
 
 ### Validation
 
-The normative JSON Schema for `v0.1.0` is located at:
+The normative JSON Schema for `v0.2.0` is located at:
+
+```
+https://memnex.org/schema/v0.2/meeting-output.schema.json
+```
+
+The previous version's schema remains available at:
 
 ```
 https://memnex.org/schema/v0.1/meeting-output.schema.json
 ```
+
+Both versions are maintained side by side. Documents declaring `schema_version: "0.1.0"` MUST be validated against the v0.1 schema; documents declaring `schema_version: "0.2.0"` MUST be validated against the v0.2 schema.
 
 In the event of a discrepancy between this prose document and the JSON Schema, **the JSON Schema is authoritative for what validates**, and this document is authoritative for the **meaning** and **intended use** of each field.
 
