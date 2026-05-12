@@ -15,7 +15,7 @@ memnex is an open specification for portable, verifiable, agent-accessible meeti
 
 This is a public draft (`v0.2.0`) of the memnex specification. It is published for community review, early implementation feedback, and incorporation into reference tooling. It is **not** a stable release. Fields, value constraints, and structural decisions may change between minor versions during the `0.x` series.
 
-v0.2.0 supersedes v0.1.0 with two backward-compatible additions (see Changelog). All documents valid under `v0.1.0` remain valid under `v0.2.0`. Producers and consumers conformant with v0.1.0 are not required to upgrade.
+v0.2.0 supersedes v0.1.0 with two backward-compatible additions (see [CHANGELOG.md](./CHANGELOG.md) for the full change list). All documents valid under `v0.1.0` remain valid under `v0.2.0`. Producers and consumers conformant with v0.1.0 are not required to upgrade.
 
 A stable `v1.0.0` release is planned following implementation feedback. From `v1.0.0` onward, the specification commits to a minimum 3-year window with no breaking changes.
 
@@ -88,6 +88,7 @@ A memnex document is a single JSON object with the following top-level fields:
 | `decisions` | no | Final decisions reached. |
 | `participants` | no | Speakers, if known. |
 | `provenance` | yes | Which tools and models produced each part. |
+| `pipeline_config` | no | Snapshot of how the pipeline was configured. |
 
 The minimum valid document has `schema_version`, `meeting_id`, `generated_at`, `source`, `transcript`, and `provenance`. A transcript-only output is valid; all LLM-derived blocks are optional.
 
@@ -311,7 +312,12 @@ The reference producer for memnex `v0.1.0` is [Samuraizer], a local-first CLI to
 
 The reference validator and TypeScript type definitions are published as the [`memnex-spec`] npm package. The validator is built on [Ajv] with format extensions and accepts any JSON value, returning either a typed document or a list of validation errors.
 
-Implementations in other languages are welcomed. A conformance test suite is published alongside this specification at [`conformance/`](./conformance/) to assist implementers in checking their output against the same canonical test cases.
+Implementations in other languages are welcomed. Conformance test suites are published alongside this specification:
+
+- [`conformance/`](./conformance/) — v0.1 suite (frozen at 15 cases)
+- [`conformance/v0.2/`](./conformance/v0.2/) — v0.2 suite (17 cases; backward-compatibility-tested against v0.1 fixtures)
+
+Each suite has its own README documenting the test matrix, runner invocation, and matching semantics. Implementers SHOULD run the suite matching the `schema_version` they intend to produce or consume.
 
 ## Governance & Stability
 
