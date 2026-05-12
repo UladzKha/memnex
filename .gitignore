@@ -25,3 +25,5 @@ npm-debug.log*
 # (synced from repo root via scripts/sync-spec.mjs)
 packages/memnex-spec-js/spec/
 packages/memnex-spec-js/LICENSE
+
+.claude
