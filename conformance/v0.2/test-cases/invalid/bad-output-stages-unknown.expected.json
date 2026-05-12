@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["enum"],
+  "expected_error_paths":    ["/pipeline_config/output_stages/0"],
+  "description": "output_stages entries must be one of: summary, action_items, decisions, participants"
+}

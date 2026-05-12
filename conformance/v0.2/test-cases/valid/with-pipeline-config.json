@@ -1,0 +1,155 @@
+{
+  "schema_version": "0.2.0",
+  "meeting_id": "01JYAB3K8MPQR2T4VWXNZCD5EF",
+  "generated_at": "2026-05-12T08:45:00Z",
+  "source": {
+    "file_name": "sprint-planning.m4a",
+    "sha256": "4a7d2c9e1b5f8a3c6e0d4b7a2e9c5f1b8d4a7e2c9b5f1d8a4e7c2b9f5d1a8c4e",
+    "format": "mp4,m4a",
+    "duration_sec": 2714.6,
+    "size_bytes": 43647488,
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "codec": "aac",
+    "recorded_at": "2026-05-12T09:00:00+02:00"
+  },
+  "transcript": {
+    "language": "en",
+    "text": "Alice: Welcome to sprint planning. Bob: I think we should prioritise the authentication refactor this sprint. Alice: Agreed, that unblocks the mobile team. Bob: I will take the backend changes. Carol: I can handle the frontend token refresh flow.",
+    "segments": [
+      {
+        "id": "seg_0001",
+        "start_sec": 0.0,
+        "end_sec": 2.8,
+        "text": "Welcome to sprint planning.",
+        "speaker_id": "p_0001",
+        "confidence": 0.97
+      },
+      {
+        "id": "seg_0002",
+        "start_sec": 2.8,
+        "end_sec": 9.3,
+        "text": "I think we should prioritise the authentication refactor this sprint.",
+        "speaker_id": "p_0002",
+        "confidence": 0.94
+      },
+      {
+        "id": "seg_0003",
+        "start_sec": 9.3,
+        "end_sec": 14.7,
+        "text": "Agreed, that unblocks the mobile team.",
+        "speaker_id": "p_0001",
+        "confidence": 0.96
+      },
+      {
+        "id": "seg_0004",
+        "start_sec": 14.7,
+        "end_sec": 19.2,
+        "text": "I will take the backend changes.",
+        "speaker_id": "p_0002",
+        "confidence": 0.95
+      },
+      {
+        "id": "seg_0005",
+        "start_sec": 19.2,
+        "end_sec": 25.8,
+        "text": "I can handle the frontend token refresh flow.",
+        "speaker_id": "p_0003",
+        "confidence": 0.93
+      }
+    ]
+  },
+  "summary": {
+    "text": "Sprint planning agreed to prioritise the authentication refactor. Bob takes backend changes; Carol owns the frontend token refresh flow. The work unblocks the mobile team."
+  },
+  "action_items": [
+    {
+      "id": "act_0001",
+      "text": "Implement backend authentication refactor",
+      "assignee": "Bob",
+      "due_date": "end of sprint",
+      "due_date_iso": "2026-05-23",
+      "status": "open",
+      "source_segment_ref": ["seg_0002", "seg_0004"]
+    },
+    {
+      "id": "act_0002",
+      "text": "Implement frontend token refresh flow",
+      "assignee": "Carol",
+      "due_date": "end of sprint",
+      "due_date_iso": "2026-05-23",
+      "status": "open",
+      "source_segment_ref": ["seg_0005"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "dec_0001",
+      "text": "Prioritise the authentication refactor for this sprint",
+      "context": "Unblocks the mobile team and reduces security surface",
+      "source_segment_ref": ["seg_0002", "seg_0003"]
+    }
+  ],
+  "participants": [
+    {
+      "id": "p_0001",
+      "name": "Alice",
+      "role": "host"
+    },
+    {
+      "id": "p_0002",
+      "name": "Bob",
+      "role": "engineer"
+    },
+    {
+      "id": "p_0003",
+      "name": "Carol",
+      "role": "engineer"
+    }
+  ],
+  "provenance": {
+    "producer": {
+      "name": "samuraizer",
+      "version": "0.3.0"
+    },
+    "pipeline": {
+      "transcription": {
+        "engine": "whisper.cpp",
+        "engine_version": "1.7.4",
+        "model_name": "ggml-large-v3",
+        "model_sha256": "2c0a4e8b6d1f3a9c7e5b2d0f4a8c6e1b3d5f9a7c2e0b4d6f8a1c3e5b7d9f0a2c"
+      },
+      "summary": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0.2
+      },
+      "action_items": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0
+      },
+      "decisions": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0
+      }
+    }
+  },
+  "pipeline_config": {
+    "language_hint": "en",
+    "chunking": {
+      "strategy": "fixed_duration",
+      "chunk_duration_sec": 60,
+      "overlap_sec": 2
+    },
+    "output_stages": ["summary", "action_items", "decisions"],
+    "prompt_template_digest": "3c8f1a4e7b2d9c6f0e3a5b8d1c4e7f2a9b6d3f0c5e8a1b4d7f2c9e6b3a0d5f8c"
+  }
+}

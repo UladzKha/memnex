@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["pattern"],
+  "expected_error_paths":    ["/pipeline_config/prompt_template_digest"],
+  "description": "prompt_template_digest must match the 64-lowercase-hex SHA-256 pattern"
+}

@@ -1,9 +1,10 @@
 # memnex Specification
 
-**Version:** 0.1.0 (draft)
-**Schema URI:** `https://memnex.org/schema/v0.1/meeting-output.schema.json`
+**Version:** 0.2.0 (draft)
+**Schema URI:** `https://memnex.org/schema/v0.2/meeting-output.schema.json`
 **JSON Schema dialect:** Draft 2020-12
 **Status:** Draft. Field names and structure may change before `v1.0.0`. From `v1.0.0` onward, this specification commits to a 3-year no-breaking-changes window.
+**Previous versions:** [v0.1.0](https://memnex.org/schema/v0.1/meeting-output.schema.json) (superseded by v0.2.0; remains valid — see Versioning).
 **License:** This document is dedicated to the public domain under [CC0 1.0](./LICENSE-SPEC). Reference code is licensed under [MIT](./LICENSE-CODE).
 
 ## Abstract
@@ -12,7 +13,9 @@ memnex is an open specification for portable, verifiable, agent-accessible meeti
 
 ## Status of This Document
 
-This is a public draft (`v0.1.0`) of the memnex specification. It is published for community review, early implementation feedback, and incorporation into reference tooling. It is **not** a stable release. Fields, value constraints, and structural decisions may change between minor versions during the `0.x` series.
+This is a public draft (`v0.2.0`) of the memnex specification. It is published for community review, early implementation feedback, and incorporation into reference tooling. It is **not** a stable release. Fields, value constraints, and structural decisions may change between minor versions during the `0.x` series.
+
+v0.2.0 supersedes v0.1.0 with two backward-compatible additions (see [CHANGELOG.md](./CHANGELOG.md) for the full change list). All documents valid under `v0.1.0` remain valid under `v0.2.0`. Producers and consumers conformant with v0.1.0 are not required to upgrade.
 
 A stable `v1.0.0` release is planned following implementation feedback. From `v1.0.0` onward, the specification commits to a minimum 3-year window with no breaking changes.
 
@@ -36,11 +39,19 @@ A consumer **MUST** check the `schema_version` field before parsing and **MAY** 
 
 ### Validation
 
-The normative JSON Schema for `v0.1.0` is located at:
+The normative JSON Schema for `v0.2.0` is located at:
+
+```
+https://memnex.org/schema/v0.2/meeting-output.schema.json
+```
+
+The previous version's schema remains available at:
 
 ```
 https://memnex.org/schema/v0.1/meeting-output.schema.json
 ```
+
+Both versions are maintained side by side. Documents declaring `schema_version: "0.1.0"` MUST be validated against the v0.1 schema; documents declaring `schema_version: "0.2.0"` MUST be validated against the v0.2 schema.
 
 In the event of a discrepancy between this prose document and the JSON Schema, **the JSON Schema is authoritative for what validates**, and this document is authoritative for the **meaning** and **intended use** of each field.
 
@@ -77,6 +88,7 @@ A memnex document is a single JSON object with the following top-level fields:
 | `decisions` | no | Final decisions reached. |
 | `participants` | no | Speakers, if known. |
 | `provenance` | yes | Which tools and models produced each part. |
+| `pipeline_config` | no | Snapshot of how the pipeline was configured. |
 
 The minimum valid document has `schema_version`, `meeting_id`, `generated_at`, `source`, `transcript`, and `provenance`. A transcript-only output is valid; all LLM-derived blocks are optional.
 
@@ -214,6 +226,45 @@ Together with `source.sha256` and (in future versions) signed outputs, this make
 
 The fields `model_sha256` / `model_digest` are **not** required in `v0.1.0` because not every runtime exposes them ergonomically. Producers **SHOULD** include them when available.
 
+#### `host_hash`
+
+An optional salted SHA-256 hash of a host identifier (hostname, MAC address, or similar). When populated, it allows consumers to group memnex documents originating from the same machine without revealing the underlying identifier.
+
+The salt is **producer-controlled** and **MUST NOT** appear in the document. Two memnex documents with the same `host_hash` were produced on the same host using the same salt. Two documents with different `host_hash` values were either produced on different hosts, or on the same host with different salts (e.g., after salt rotation).
+
+Producers **SHOULD** omit this field by default and populate it only when host grouping is an explicit requirement. The field is `null`-able for cases where the producer needs to record that grouping was deliberately not performed.
+
+Consumers **MUST NOT** treat `host_hash` as a stable identifier across producers, across documents with different salts, or as a verifiable claim about origin. It is a grouping signal, not an attestation.
+
+### `pipeline_config`
+
+An optional object capturing the configuration of the pipeline that produced this document. Where `provenance` records *what* tools and models were used, `pipeline_config` records *how* they were configured: language hints, audio segmentation strategy, which downstream stages were enabled, and (when available) a digest of the prompt templates fed to the LLM.
+
+The field is **OPTIONAL** at the top level. When omitted, consumers **MUST NOT** infer absence of configuration — only absence of disclosure.
+
+`pipeline_config` defines a small set of standardized sub-fields representing common-ground configuration that any producer can reasonably surface. It also accepts arbitrary additional keys (`additionalProperties: true` in the schema), allowing producers to attach their own configuration namespace without breaking validation. Standardized sub-fields are described below; producer-specific extensions are out of scope for this specification.
+
+#### Standardized sub-fields
+
+- **`language_hint`** — A [BCP 47] language tag passed to the ASR engine as a hint (`"en"`, `"ru"`, `"en-US"`). May be `null` if auto-detection was used. Distinct from `transcript.language`, which records the *result* of detection or specification; `language_hint` records the *input*.
+
+- **`chunking`** — An object describing how the source audio was segmented for processing. Sub-fields:
+    - **`strategy`** — One of `"none"` (whole-file pass), `"fixed_duration"` (regular interval slicing), `"vad"` (voice-activity-detection-driven), or `"silence"` (silence-detected boundaries).
+    - **`chunk_duration_sec`** — Target chunk length in seconds when `strategy` is `"fixed_duration"`. May be `null` when not applicable.
+    - **`overlap_sec`** — Overlap between adjacent chunks in seconds, when applicable. May be `null`.
+
+- **`output_stages`** — An array of stage names that were enabled in this pipeline run. Permitted values: `"summary"`, `"action_items"`, `"decisions"`, `"participants"`. The array **MUST** have unique entries. Allows consumers to distinguish *intentional absence* of a derived block (the stage was disabled) from *missing data* (the stage failed or the producer chose not to disclose).
+
+- **`prompt_template_digest`** — A SHA-256 hash (lowercase hex) of the prompt template(s) used for LLM-driven stages, concatenated in a producer-defined order. May be `null` when no LLM stages were run, or when the producer cannot or chooses not to disclose the digest. Enables consumers to detect when a producer's prompts have changed between runs, even when model name and version remain stable.
+
+#### Why these sub-fields and not more
+
+`pipeline_config` is deliberately small. The four standardized sub-fields cover the cases where divergence between producers most often surprises consumers: an unexpected ASR language hint, a chunking strategy that affects timestamp accuracy, an output stage silently disabled, or a changed prompt regime that explains drift in downstream content. Producer-specific configuration (whisper threads, ollama keep-alive timeouts, audio normalization filters) does not need standardization to be useful — it goes under producer-namespaced keys via `additionalProperties`.
+
+#### Hash naming convention
+
+Fields holding hashes are named for their algorithm (`prompt_template_digest` is SHA-256). If a future version standardizes additional hash algorithms, new fields **MUST** be added as siblings (e.g., `prompt_template_digest_blake3`) rather than as renames or as algorithm-agnostic fields with a separate `algorithm` discriminator. This keeps the schema self-documenting and avoids the validation complexity of agility-by-discriminator.
+
 ## Versioning
 
 This specification follows [semantic versioning] at the document level:
@@ -247,11 +298,13 @@ This section is normative for considerations producers and consumers should be a
 - **File paths.** The `source.file_name` field is specified as a basename to avoid leaking filesystem layout. Producers **MUST NOT** populate it with a full path, and **SHOULD NOT** populate it with relative paths containing directory components.
 - **Personal names.** `assignee` and `participants[].name` fields may contain personally identifiable information. Producers **SHOULD** consider local privacy obligations (GDPR, CCPA, sector-specific regulations) before storing, transmitting, or publishing memnex documents containing such data.
 - **Audio retention.** memnex documents are derivatives of audio recordings. Privacy obligations attached to the source audio (consent, retention limits, jurisdictional restrictions) generally apply equally to memnex documents derived from it.
+- **Host identification.** The optional `provenance.host_hash` field is provided for producers that need to group documents from the same machine. Producers **SHOULD** use a salt that is itself unique to a privacy boundary (e.g., per-user, per-project) and **MUST NOT** include the salt in the document. Reusing a global static salt undermines the field's privacy benefit and is **NOT RECOMMENDED**.
 
 ### Considerations for consumers
 
 - **Untrusted producers.** A memnex document is structured data, not a trust statement. Consumers **MUST NOT** assume that the values in `provenance` accurately describe what a producer actually did. A malicious or buggy producer can claim any model and any version. Verification, where required, **MUST** rely on cryptographic signing (forthcoming) or out-of-band trust.
 - **Source verification.** Consumers that have access to the original audio **SHOULD** verify `source.sha256` matches a re-computed hash before relying on derived content.
+- **Host grouping is not identity.** Consumers **MUST NOT** treat `provenance.host_hash` as a verified identifier of a machine or user. It is a producer-controlled grouping signal under a producer-controlled salt; it does not survive salt rotation, and a malicious producer can fabricate it. Use it for de-duplication and clustering, not for trust decisions.
 
 ## Reference Implementations
 
@@ -259,7 +312,12 @@ The reference producer for memnex `v0.1.0` is [Samuraizer], a local-first CLI to
 
 The reference validator and TypeScript type definitions are published as the [`memnex-spec`] npm package. The validator is built on [Ajv] with format extensions and accepts any JSON value, returning either a typed document or a list of validation errors.
 
-Implementations in other languages are welcomed. A conformance test suite is published alongside this specification at [`conformance/`](./conformance/) to assist implementers in checking their output against the same canonical test cases.
+Implementations in other languages are welcomed. Conformance test suites are published alongside this specification:
+
+- [`conformance/`](./conformance/) — v0.1 suite (frozen at 15 cases)
+- [`conformance/v0.2/`](./conformance/v0.2/) — v0.2 suite (17 cases; backward-compatibility-tested against v0.1 fixtures)
+
+Each suite has its own README documenting the test matrix, runner invocation, and matching semantics. Implementers SHOULD run the suite matching the `schema_version` they intend to produce or consume.
 
 ## Governance & Stability
 

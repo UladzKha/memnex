@@ -1,0 +1,151 @@
+{
+  "schema_version": "0.2.0",
+  "meeting_id": "01JYCD4M7NOPQRS5TUVWXYZ8ABC",
+  "generated_at": "2026-05-12T14:00:00Z",
+  "source": {
+    "file_name": "design-review.wav",
+    "sha256": "d3f7b1e4a8c2f5b9e6d0c4a7f3b8e1c5a9d2f6b0e4c8a1d5f9b3e7a0c4d8f2b6",
+    "format": "wav",
+    "duration_sec": 1560.8,
+    "size_bytes": 26738688,
+    "sample_rate_hz": 44100,
+    "channels": 1,
+    "codec": "pcm_s16le",
+    "recorded_at": "2026-05-12T14:00:00+02:00"
+  },
+  "transcript": {
+    "language": "en",
+    "text": "Alice: Let us kick off the design review for the new settings page. Bob: I have concerns about the information density on mobile. Alice: Good point. Should we go with a tabbed layout? Bob: Yes, tabs would help. Carol: I can prototype that in Figma by tomorrow.",
+    "segments": [
+      {
+        "id": "seg_0001",
+        "start_sec": 0.0,
+        "end_sec": 5.3,
+        "text": "Let us kick off the design review for the new settings page.",
+        "speaker_id": "p_0001",
+        "confidence": 0.96
+      },
+      {
+        "id": "seg_0002",
+        "start_sec": 5.3,
+        "end_sec": 11.0,
+        "text": "I have concerns about the information density on mobile.",
+        "speaker_id": "p_0002",
+        "confidence": 0.95
+      },
+      {
+        "id": "seg_0003",
+        "start_sec": 11.0,
+        "end_sec": 16.7,
+        "text": "Good point. Should we go with a tabbed layout?",
+        "speaker_id": "p_0001",
+        "confidence": 0.97
+      },
+      {
+        "id": "seg_0004",
+        "start_sec": 16.7,
+        "end_sec": 20.2,
+        "text": "Yes, tabs would help.",
+        "speaker_id": "p_0002",
+        "confidence": 0.94
+      },
+      {
+        "id": "seg_0005",
+        "start_sec": 20.2,
+        "end_sec": 27.5,
+        "text": "I can prototype that in Figma by tomorrow.",
+        "speaker_id": "p_0003",
+        "confidence": 0.95
+      }
+    ]
+  },
+  "summary": {
+    "text": "Design review identified mobile information density as a concern on the new settings page. Resolved to adopt a tabbed layout. Carol will prototype it in Figma by tomorrow."
+  },
+  "action_items": [
+    {
+      "id": "act_0001",
+      "text": "Prototype tabbed settings layout in Figma",
+      "assignee": "Carol",
+      "due_date": "tomorrow",
+      "due_date_iso": "2026-05-13",
+      "status": "open",
+      "source_segment_ref": ["seg_0004", "seg_0005"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "dec_0001",
+      "text": "Use a tabbed layout for the new settings page on mobile",
+      "context": "Reduces information density; improves scannability on small screens",
+      "source_segment_ref": ["seg_0002", "seg_0003", "seg_0004"]
+    }
+  ],
+  "participants": [
+    {
+      "id": "p_0001",
+      "name": "Alice",
+      "role": "host"
+    },
+    {
+      "id": "p_0002",
+      "name": "Bob",
+      "role": "engineer"
+    },
+    {
+      "id": "p_0003",
+      "name": "Carol",
+      "role": "designer"
+    }
+  ],
+  "provenance": {
+    "producer": {
+      "name": "samuraizer",
+      "version": "0.3.0"
+    },
+    "pipeline": {
+      "transcription": {
+        "engine": "whisper.cpp",
+        "engine_version": "1.7.4",
+        "model_name": "ggml-large-v3",
+        "model_sha256": "f1e4b7a0d3c6f9b2e5a8d1c4f7b0e3a6d9c2f5b8e1a4d7c0f3b6e9a2d5c8f1b4"
+      },
+      "summary": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0.2
+      },
+      "action_items": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0
+      },
+      "decisions": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0
+      }
+    }
+  },
+  "pipeline_config": {
+    "language_hint": "en",
+    "chunking": {
+      "strategy": "vad",
+      "chunk_duration_sec": null,
+      "overlap_sec": null
+    },
+    "output_stages": ["summary", "action_items", "decisions"],
+    "prompt_template_digest": "e6b2d9f4a1c7e3b8f5d2a9c4e0b6f3a8d5c1e7b4f0a2d8c5e1b7f4a0d6c3e9b5",
+    "samuraizer_extensions": {
+      "whisper_threads": 8,
+      "ollama_keep_alive_sec": 300,
+      "audio_normalization": "loudnorm"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["minimum"],
+  "expected_error_paths":    ["/pipeline_config/chunking/overlap_sec"],
+  "description": "chunking.overlap_sec must be >= 0"
+}
