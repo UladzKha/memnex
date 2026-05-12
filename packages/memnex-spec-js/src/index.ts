@@ -11,11 +11,11 @@
  * Specification: https://github.com/UladzKha/memnex
  */
 
-import schema from "../spec/meeting-output.schema.json" with { type: "json" };
+import schema from "../spec/v0.1/meeting-output.schema.json" with { type: "json" };
 
 export { validate, isValid } from "./validate.js";
 export type { ValidationResult, ValidationError } from "./validate.js";
-export type { MeetingOutput } from "../dist/types.js";
+export type { MeetingOutput } from "../dist/v0.1/types.js";
 
 /**
  * The raw JSON Schema document. Useful for tools that want to compile

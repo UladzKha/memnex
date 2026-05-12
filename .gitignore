@@ -23,6 +23,5 @@ npm-debug.log*
 
 # Generated files in memnex-spec-js package
 # (synced from repo root via scripts/sync-spec.mjs)
-packages/memnex-spec-js/spec/meeting-output.schema.json
-packages/memnex-spec-js/spec/examples/
+packages/memnex-spec-js/spec/
 packages/memnex-spec-js/LICENSE
