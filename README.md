@@ -1,10 +1,10 @@
 # memnex
 
-An open specification for verifiable, agent-accessible meeting data.
+An open specification for verifiable, agent-accessible meeting data — a portable JSON document combining transcript, summary, action items, decisions, and provenance metadata.
 
-Draft v0.1 — work in progress. First public release expected May 2026.
+Current version: v0.2 (May 2026). See [SPEC.md](./SPEC.md) for the full specification.
 
-A reference implementation is being developed as part of [Samuraizer](https://github.com/UladzKha/samuraizer-cli).
+The [`memnex-spec`](https://www.npmjs.com/package/memnex-spec) package on npm is the reference TypeScript/JavaScript validator. [Samuraizer](https://github.com/UladzKha/samuraizer-cli) is a reference adopter — a local-first meeting processing CLI that produces memnex-conforming outputs.
 
 ## Status
 
