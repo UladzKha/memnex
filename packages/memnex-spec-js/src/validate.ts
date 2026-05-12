@@ -2,8 +2,8 @@ import { Ajv2020 } from "ajv/dist/2020.js";
 import { default as _addFormats } from "ajv-formats";
 import type { FormatsPlugin } from "ajv-formats";
 import type { ErrorObject } from "ajv";
-import schema from "../spec/meeting-output.schema.json" with { type: "json" };
-import type { MeetingOutput } from "../dist/types.js";
+import schema from "../spec/v0.1/meeting-output.schema.json" with { type: "json" };
+import type { MeetingOutput } from "../dist/v0.1/types.js";
 
 export type ValidationError = {
     /** JSON Pointer to the offending field, e.g. "/transcript/segments/0/end_sec". */
