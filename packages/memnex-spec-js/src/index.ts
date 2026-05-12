@@ -2,24 +2,19 @@
  * memnex-spec — reference JavaScript/TypeScript implementation
  * of the memnex specification for meeting outputs.
  *
+ * This module re-exports the latest schema version (currently v0.2).
+ * For version-pinned imports, use:
+ *   - `memnex-spec/v0.1` — pin to v0.1 schema
+ *   - `memnex-spec/v0.2` — pin to v0.2 schema (same as default)
+ *
  * Public API:
- * - validate (data): runtime validation with detailed errors
+ * - validate (data): runtime validation against latest schema
  * - isValid (data): type guard variant
- * - schema: the raw JSON Schema document, for downstream tools
+ * - schema: the raw JSON Schema document for the latest version
  * - MeetingOutput, ValidationResult, ValidationError: types
  *
  * Specification: https://github.com/UladzKha/memnex
  */
 
-import schema from "../spec/v0.1/meeting-output.schema.json" with { type: "json" };
-
-export { validate, isValid } from "./validate.js";
-export type { ValidationResult, ValidationError } from "./validate.js";
-export type { MeetingOutput } from "../dist/v0.1/types.js";
-
-/**
- * The raw JSON Schema document. Useful for tools that want to compile
- * their own validator (e.g. with a different ajv configuration) or
- * generate language bindings beyond TypeScript.
- */
-export { schema };
+export { validate, isValid, schema } from "./v0.2/index.js";
+export type { ValidationResult, ValidationError, MeetingOutput } from "./v0.2/index.js";

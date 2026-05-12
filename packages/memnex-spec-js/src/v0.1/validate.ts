@@ -2,8 +2,8 @@ import { Ajv2020 } from "ajv/dist/2020.js";
 import { default as _addFormats } from "ajv-formats";
 import type { FormatsPlugin } from "ajv-formats";
 import type { ErrorObject } from "ajv";
-import schema from "../spec/v0.1/meeting-output.schema.json" with { type: "json" };
-import type { MeetingOutput } from "../dist/v0.1/types.js";
+import schema from "../../spec/v0.1/meeting-output.schema.json" with { type: "json" };
+import type { MeetingOutput } from "../../dist/v0.1/types.js";
 
 export type ValidationError = {
     /** JSON Pointer to the offending field, e.g. "/transcript/segments/0/end_sec". */
@@ -24,20 +24,10 @@ const ajv = new Ajv2020({ allErrors: true, strict: true });
 const validateFn = ajv.compile<MeetingOutput>(schema);
 
 /**
- * Validate an unknown value against the memnex meeting output schema.
+ * Validate an unknown value against the memnex v0.1 meeting output schema.
  *
  * On success the value is returned, narrowed to MeetingOutput.
  * On failure a list of human-readable errors is returned.
- *
- * @example
- *   const result = validate(JSON.parse(text));
- *   if (result.valid) {
- *       console.log(result.data.meeting_id);
- *   } else {
- *       for (const err of result.errors) {
- *           console.error(`${err.path}: ${err.message}`);
- *       }
- *   }
  */
 export function validate(data: unknown): ValidationResult {
     if (validateFn(data)) {
@@ -51,9 +41,7 @@ export function validate(data: unknown): ValidationResult {
 
 /**
  * Type guard variant of validate(). Returns true if data conforms to the
- * memnex meeting output schema, narrowing the type accordingly.
- *
- * Errors are not exposed; use validate() if you need diagnostics.
+ * memnex v0.1 meeting output schema, narrowing the type accordingly.
  */
 export function isValid(data: unknown): data is MeetingOutput {
     return validateFn(data) === true;
