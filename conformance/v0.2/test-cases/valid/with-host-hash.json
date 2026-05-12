@@ -1,0 +1,124 @@
+{
+  "schema_version": "0.2.0",
+  "meeting_id": "01JYBCD9R4STUVWXY2Z3ABEF7GH",
+  "generated_at": "2026-05-12T10:15:00Z",
+  "source": {
+    "file_name": "engineering-all-hands.m4a",
+    "sha256": "b5e1c8f4a2d6b9e3c7f0a4d8b2e6c9f3a0d4b7e1c5f8a3d6b0e4c7f1a5d9b3e6",
+    "format": "mp4,m4a",
+    "duration_sec": 3612.0,
+    "size_bytes": 58195968,
+    "sample_rate_hz": 48000,
+    "channels": 2,
+    "codec": "aac",
+    "recorded_at": "2026-05-12T10:00:00+02:00"
+  },
+  "transcript": {
+    "language": "en",
+    "text": "Alice: Good morning everyone, welcome to the engineering all-hands. Bob: Thanks Alice. I wanted to share that we hit 99.97% uptime last month. Alice: Excellent. Bob, can you write that up as a post-mortem template? Bob: Sure, I will have a draft by Thursday.",
+    "segments": [
+      {
+        "id": "seg_0001",
+        "start_sec": 0.0,
+        "end_sec": 4.1,
+        "text": "Good morning everyone, welcome to the engineering all-hands.",
+        "speaker_id": "p_0001",
+        "confidence": 0.97
+      },
+      {
+        "id": "seg_0002",
+        "start_sec": 4.1,
+        "end_sec": 10.6,
+        "text": "Thanks Alice. I wanted to share that we hit 99.97% uptime last month.",
+        "speaker_id": "p_0002",
+        "confidence": 0.95
+      },
+      {
+        "id": "seg_0003",
+        "start_sec": 10.6,
+        "end_sec": 16.4,
+        "text": "Excellent. Bob, can you write that up as a post-mortem template?",
+        "speaker_id": "p_0001",
+        "confidence": 0.96
+      },
+      {
+        "id": "seg_0004",
+        "start_sec": 16.4,
+        "end_sec": 21.0,
+        "text": "Sure, I will have a draft by Thursday.",
+        "speaker_id": "p_0002",
+        "confidence": 0.94
+      }
+    ]
+  },
+  "summary": {
+    "text": "Engineering all-hands highlighted 99.97% uptime achievement last month. Bob committed to producing a post-mortem template by Thursday to capture the learnings."
+  },
+  "action_items": [
+    {
+      "id": "act_0001",
+      "text": "Write up post-mortem template based on last month's uptime run",
+      "assignee": "Bob",
+      "due_date": "by Thursday",
+      "due_date_iso": "2026-05-14",
+      "status": "open",
+      "source_segment_ref": ["seg_0003", "seg_0004"]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "dec_0001",
+      "text": "Adopt a reusable post-mortem template for reliability wins",
+      "context": "Capture learnings from 99.97% uptime month for future reference",
+      "source_segment_ref": ["seg_0002", "seg_0003"]
+    }
+  ],
+  "participants": [
+    {
+      "id": "p_0001",
+      "name": "Alice",
+      "role": "host"
+    },
+    {
+      "id": "p_0002",
+      "name": "Bob",
+      "role": "engineer"
+    }
+  ],
+  "provenance": {
+    "producer": {
+      "name": "samuraizer",
+      "version": "0.3.0"
+    },
+    "pipeline": {
+      "transcription": {
+        "engine": "whisper.cpp",
+        "engine_version": "1.7.4",
+        "model_name": "ggml-large-v3",
+        "model_sha256": "8d3f1c9e5b7a2d4f8c0e3b6a9d1f4c7e2b5a8d0f3c6e9b1a4d7f0c3e6b9a2d58"
+      },
+      "summary": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0.2
+      },
+      "action_items": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0
+      },
+      "decisions": {
+        "runtime": "ollama",
+        "runtime_version": "0.5.7",
+        "model_name": "qwen2.5:14b",
+        "model_digest": "sha256:7cdf5a0187d5c8f6c4b9a1e2d3f4a5b6c7d8e9f0a1b2c3d4e5f67890abcdef01",
+        "temperature": 0
+      }
+    },
+    "host_hash": "f2a8c5e1b9d4f7a2c6e0b3d7f1a5c9e2b6d0f4a8c3e7b1d5f9a2c6e0b4d8f3a7"
+  }
+}

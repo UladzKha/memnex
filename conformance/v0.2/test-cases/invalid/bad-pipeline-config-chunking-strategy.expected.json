@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["enum"],
+  "expected_error_paths":    ["/pipeline_config/chunking/strategy"],
+  "description": "chunking.strategy must be one of: none, fixed_duration, vad, silence"
+}

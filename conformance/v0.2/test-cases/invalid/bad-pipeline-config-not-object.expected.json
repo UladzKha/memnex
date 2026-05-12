@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["type"],
+  "expected_error_paths":    ["/pipeline_config"],
+  "description": "pipeline_config must be an object"
+}

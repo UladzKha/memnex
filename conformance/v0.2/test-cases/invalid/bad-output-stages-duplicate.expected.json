@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["uniqueItems"],
+  "expected_error_paths":    ["/pipeline_config/output_stages"],
+  "description": "output_stages entries must be unique"
+}

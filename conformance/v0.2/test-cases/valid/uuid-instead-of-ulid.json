@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.2.0",
+  "meeting_id": "550e8400-e29b-41d4-a716-446655440000",
+  "generated_at": "2026-05-11T12:00:00Z",
+  "source": {
+    "file_name": "board-call.m4a",
+    "sha256": "e4f6a8c0b2d4f6a8c0e2a4c6e8b0d2f4a6c8e0b2d4f6a8c0e2a4c6e8b0d2f4a6",
+    "format": "mp4,m4a"
+  },
+  "transcript": {
+    "language": "en",
+    "text": "Good afternoon. The board call is starting.",
+    "segments": [
+      {
+        "id": "seg_0001",
+        "start_sec": 0.0,
+        "end_sec": 3.5,
+        "text": "Good afternoon. The board call is starting."
+      }
+    ]
+  },
+  "provenance": {
+    "producer": {
+      "name": "samuraizer",
+      "version": "0.2.0"
+    },
+    "pipeline": {
+      "transcription": {
+        "engine": "whisper.cpp"
+      }
+    }
+  }
+}

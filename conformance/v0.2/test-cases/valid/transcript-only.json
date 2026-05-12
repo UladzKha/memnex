@@ -1,0 +1,33 @@
+{
+  "schema_version": "0.2.0",
+  "meeting_id": "01JXPQ5N8TRKA4MWVZD3GFBY7C",
+  "generated_at": "2026-05-11T09:15:00Z",
+  "source": {
+    "file_name": "sync-call.m4a",
+    "sha256": "c2f1a3e5b7d9f0a2c4e6b8d0f2a4c6e8b0d2f4a6c8e0b2d4f6a8c0e2a4c6e8b0",
+    "format": "mp4,m4a"
+  },
+  "transcript": {
+    "language": "en",
+    "text": "Let us begin the sync call.",
+    "segments": [
+      {
+        "id": "seg_0001",
+        "start_sec": 0.0,
+        "end_sec": 2.1,
+        "text": "Let us begin the sync call."
+      }
+    ]
+  },
+  "provenance": {
+    "producer": {
+      "name": "samuraizer",
+      "version": "0.2.0"
+    },
+    "pipeline": {
+      "transcription": {
+        "engine": "whisper.cpp"
+      }
+    }
+  }
+}

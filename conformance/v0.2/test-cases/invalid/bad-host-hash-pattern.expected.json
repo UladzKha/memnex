@@ -1,0 +1,6 @@
+{
+  "valid": false,
+  "expected_error_keywords": ["pattern"],
+  "expected_error_paths":    ["/provenance/host_hash"],
+  "description": "host_hash must match the 64-lowercase-hex SHA-256 pattern"
+}
