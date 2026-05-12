@@ -225,6 +225,45 @@ Together with `source.sha256` and (in future versions) signed outputs, this make
 
 The fields `model_sha256` / `model_digest` are **not** required in `v0.1.0` because not every runtime exposes them ergonomically. Producers **SHOULD** include them when available.
 
+#### `host_hash`
+
+An optional salted SHA-256 hash of a host identifier (hostname, MAC address, or similar). When populated, it allows consumers to group memnex documents originating from the same machine without revealing the underlying identifier.
+
+The salt is **producer-controlled** and **MUST NOT** appear in the document. Two memnex documents with the same `host_hash` were produced on the same host using the same salt. Two documents with different `host_hash` values were either produced on different hosts, or on the same host with different salts (e.g., after salt rotation).
+
+Producers **SHOULD** omit this field by default and populate it only when host grouping is an explicit requirement. The field is `null`-able for cases where the producer needs to record that grouping was deliberately not performed.
+
+Consumers **MUST NOT** treat `host_hash` as a stable identifier across producers, across documents with different salts, or as a verifiable claim about origin. It is a grouping signal, not an attestation.
+
+### `pipeline_config`
+
+An optional object capturing the configuration of the pipeline that produced this document. Where `provenance` records *what* tools and models were used, `pipeline_config` records *how* they were configured: language hints, audio segmentation strategy, which downstream stages were enabled, and (when available) a digest of the prompt templates fed to the LLM.
+
+The field is **OPTIONAL** at the top level. When omitted, consumers **MUST NOT** infer absence of configuration — only absence of disclosure.
+
+`pipeline_config` defines a small set of standardized sub-fields representing common-ground configuration that any producer can reasonably surface. It also accepts arbitrary additional keys (`additionalProperties: true` in the schema), allowing producers to attach their own configuration namespace without breaking validation. Standardized sub-fields are described below; producer-specific extensions are out of scope for this specification.
+
+#### Standardized sub-fields
+
+- **`language_hint`** — A [BCP 47] language tag passed to the ASR engine as a hint (`"en"`, `"ru"`, `"en-US"`). May be `null` if auto-detection was used. Distinct from `transcript.language`, which records the *result* of detection or specification; `language_hint` records the *input*.
+
+- **`chunking`** — An object describing how the source audio was segmented for processing. Sub-fields:
+    - **`strategy`** — One of `"none"` (whole-file pass), `"fixed_duration"` (regular interval slicing), `"vad"` (voice-activity-detection-driven), or `"silence"` (silence-detected boundaries).
+    - **`chunk_duration_sec`** — Target chunk length in seconds when `strategy` is `"fixed_duration"`. May be `null` when not applicable.
+    - **`overlap_sec`** — Overlap between adjacent chunks in seconds, when applicable. May be `null`.
+
+- **`output_stages`** — An array of stage names that were enabled in this pipeline run. Permitted values: `"summary"`, `"action_items"`, `"decisions"`, `"participants"`. The array **MUST** have unique entries. Allows consumers to distinguish *intentional absence* of a derived block (the stage was disabled) from *missing data* (the stage failed or the producer chose not to disclose).
+
+- **`prompt_template_digest`** — A SHA-256 hash (lowercase hex) of the prompt template(s) used for LLM-driven stages, concatenated in a producer-defined order. May be `null` when no LLM stages were run, or when the producer cannot or chooses not to disclose the digest. Enables consumers to detect when a producer's prompts have changed between runs, even when model name and version remain stable.
+
+#### Why these sub-fields and not more
+
+`pipeline_config` is deliberately small. The four standardized sub-fields cover the cases where divergence between producers most often surprises consumers: an unexpected ASR language hint, a chunking strategy that affects timestamp accuracy, an output stage silently disabled, or a changed prompt regime that explains drift in downstream content. Producer-specific configuration (whisper threads, ollama keep-alive timeouts, audio normalization filters) does not need standardization to be useful — it goes under producer-namespaced keys via `additionalProperties`.
+
+#### Hash naming convention
+
+Fields holding hashes are named for their algorithm (`prompt_template_digest` is SHA-256). If a future version standardizes additional hash algorithms, new fields **MUST** be added as siblings (e.g., `prompt_template_digest_blake3`) rather than as renames or as algorithm-agnostic fields with a separate `algorithm` discriminator. This keeps the schema self-documenting and avoids the validation complexity of agility-by-discriminator.
+
 ## Versioning
 
 This specification follows [semantic versioning] at the document level:
@@ -258,11 +297,13 @@ This section is normative for considerations producers and consumers should be a
 - **File paths.** The `source.file_name` field is specified as a basename to avoid leaking filesystem layout. Producers **MUST NOT** populate it with a full path, and **SHOULD NOT** populate it with relative paths containing directory components.
 - **Personal names.** `assignee` and `participants[].name` fields may contain personally identifiable information. Producers **SHOULD** consider local privacy obligations (GDPR, CCPA, sector-specific regulations) before storing, transmitting, or publishing memnex documents containing such data.
 - **Audio retention.** memnex documents are derivatives of audio recordings. Privacy obligations attached to the source audio (consent, retention limits, jurisdictional restrictions) generally apply equally to memnex documents derived from it.
+- **Host identification.** The optional `provenance.host_hash` field is provided for producers that need to group documents from the same machine. Producers **SHOULD** use a salt that is itself unique to a privacy boundary (e.g., per-user, per-project) and **MUST NOT** include the salt in the document. Reusing a global static salt undermines the field's privacy benefit and is **NOT RECOMMENDED**.
 
 ### Considerations for consumers
 
 - **Untrusted producers.** A memnex document is structured data, not a trust statement. Consumers **MUST NOT** assume that the values in `provenance` accurately describe what a producer actually did. A malicious or buggy producer can claim any model and any version. Verification, where required, **MUST** rely on cryptographic signing (forthcoming) or out-of-band trust.
 - **Source verification.** Consumers that have access to the original audio **SHOULD** verify `source.sha256` matches a re-computed hash before relying on derived content.
+- **Host grouping is not identity.** Consumers **MUST NOT** treat `provenance.host_hash` as a verified identifier of a machine or user. It is a producer-controlled grouping signal under a producer-controlled salt; it does not survive salt rotation, and a malicious producer can fabricate it. Use it for de-duplication and clustering, not for trust decisions.
 
 ## Reference Implementations
 
