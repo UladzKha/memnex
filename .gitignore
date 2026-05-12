@@ -27,3 +27,5 @@ packages/memnex-spec-js/spec/
 packages/memnex-spec-js/LICENSE
 
 .claude
+
+*.tgz
