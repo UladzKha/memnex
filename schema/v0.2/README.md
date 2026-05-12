@@ -1,6 +1,6 @@
-# memnex schema v0.1 (draft)
+# memnex schema v0.2 (draft)
 
-JSON Schema (Draft 2020-12) for the v0.1 draft of the memnex specification.
+JSON Schema (Draft 2020-12) for the v0.2 draft of the memnex specification.
 
 ## Files
 
@@ -9,9 +9,9 @@ JSON Schema (Draft 2020-12) for the v0.1 draft of the memnex specification.
 ## Identifier
 
 The canonical URL for this schema (`$id`) is:
-https://memnex.org/schema/v0.1/meeting-output.schema.json
+https://memnex.org/schema/v0.2/meeting-output.schema.json
 
-This URL is the stable identifier embedded in conforming documents via the `$schema` field. The same content is served from this repository (and, after `v0.1.0` release, from memnex.org).
+This URL is the stable identifier embedded in conforming documents via the `$schema` field. The same content is served from this repository (and, after `v0.2.0` release, from memnex.org).
 
 ## Status
 
