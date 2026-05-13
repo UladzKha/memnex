@@ -1,0 +1,43 @@
+# Jekyll configuration for memnex.org
+# Minimal config — RFC-vibe documentation site
+
+title: memnex
+description: Open specification for portable meeting outputs
+url: https://memnex.org
+
+# Use minimal theme — clean, readable, no marketing flair
+theme: minima
+
+# Markdown processor
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# What Jekyll should NOT process or expose as pages
+exclude:
+  - README.md
+  - CONTRIBUTING.md
+  - CODE_OF_CONDUCT.md
+  - GOVERNANCE.md
+  - CHANGELOG.md
+  - LICENSE-CODE
+  - LICENSE-SPEC
+  - packages/
+  - conformance/
+  - .github/
+  - .gitignore
+  - Gemfile
+  - Gemfile.lock
+
+# What Jekyll should treat as static (serve as-is, don't process)
+include:
+  - schema
+  - examples
+
+# Permalinks
+permalink: /:path/
+
+# Plugins (only Pages-allowed)
+plugins:
+  - jekyll-redirect-from

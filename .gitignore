@@ -29,3 +29,11 @@ packages/memnex-spec-js/LICENSE
 .claude
 
 *.tgz
+
+# Jekyll build artifacts
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/
+.bundle/
