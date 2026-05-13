@@ -14,8 +14,15 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# What Jekyll should NOT process or expose as pages
+# Plugins (only Pages-allowed)
+plugins:
+  - jekyll-redirect-from
+
+# What Jekyll should NOT process or expose at all.
+# We list everything aggressively to keep the published site
+# strictly limited to: index.md, SPEC.md, and the static schema/ tree.
 exclude:
+  # Top-level repo docs that belong on GitHub, not on the site
   - README.md
   - CONTRIBUTING.md
   - CODE_OF_CONDUCT.md
@@ -23,21 +30,42 @@ exclude:
   - CHANGELOG.md
   - LICENSE-CODE
   - LICENSE-SPEC
-  - packages/
-  - conformance/
-  - .github/
   - .gitignore
+  - .github/
   - Gemfile
   - Gemfile.lock
+  # Code packages — internal, served via GitHub & npm only
+  - packages/
+  # Conformance tooling — viewable on GitHub
+  - conformance/
+  # Examples directory — JSON examples are useful, but their README
+  # should not become a nav item
+  - examples/
+  # All node_modules anywhere in the tree
+  - node_modules/
+  # READMEs inside schema directories — schema files themselves
+  # are still served as static assets
+  - schema/README.md
+  - schema/v0.1/README.md
+  - schema/v0.2/README.md
 
-# What Jekyll should treat as static (serve as-is, don't process)
-include:
-  - schema
-  - examples
-
-# Permalinks
-permalink: /:path/
-
-# Plugins (only Pages-allowed)
-plugins:
-  - jekyll-redirect-from
+# Belt-and-braces: any markdown file we did not whitelist below
+# is not published as a page. Schema JSON files are not affected
+# (they are served as static assets regardless of these rules).
+defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      published: false
+  - scope:
+      path: "index.md"
+    values:
+      published: true
+      layout: default
+  - scope:
+      path: "SPEC.md"
+    values:
+      published: true
+      layout: default
+      title: "memnex Specification"
