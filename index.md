@@ -17,7 +17,7 @@ It is designed for local-first applications, where meeting recordings and their 
 
 - **Current version:** v0.2 ([schema]({{ '/schema/v0.2/meeting-output.schema.json' | relative_url }}))
 - **Previous version:** v0.1 (frozen, [schema]({{ '/schema/v0.1/meeting-output.schema.json' | relative_url }}))
-- **Listed in:** [SchemaStore.org](https://www.schemastore.org/json/)
+- **Listed in:** [SchemaStore.org](https://www.schemastore.org/)
 - **Reference implementation:** [Samuraizer CLI](https://github.com/UladzKha/samuraizer-cli)
 
 ## Resources
