@@ -12,7 +12,10 @@ No unreleased changes at this time.
 
 ## [0.2.0] — 2026-05-12
 
-Backward-compatible minor release. All documents valid under `0.1.0` remain valid under `0.2.0`.
+Backward-compatible minor release. All documents valid under `0.1.0` remain valid under 
+`0.2.0`.
+
+- **Schemastore catalog entry** — updated to reference canonical `memnex.org` URLs instead of `raw.githubusercontent.com`. Default URL now points to v0.2 (current) instead of v0.1 (previous), and a `versions` block lists both v0.1 (frozen) and v0.2 (current). Description updated to include the project URL. All URLs verified live: schemas resolve with HTTP 200 and `Content-Type: application/json`. SchemaStore PR [#5686](https://github.com/SchemaStore/schemastore/pull/5686), follows the original entry in PR [#5676](https://github.com/SchemaStore/schemastore/pull/5676).
 
 ### Added
 
