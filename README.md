@@ -26,6 +26,20 @@ At minimum, emit `schema_version: "0.2.0"`, keep transcript segment IDs stable, 
 
 Expose the same memnex document through a resource or tool so agents can query meeting history without learning a vendor-specific shape. [Samuraizer](https://github.com/UladzKha/samuraizer-cli) is the reference implementation.
 
+### Try it in 60 seconds
+
+Run the validator against the bundled v0.2 example:
+
+```bash
+mkdir memnex-demo && cd memnex-demo
+npm init -y
+npm install memnex-spec
+curl -O https://raw.githubusercontent.com/UladzKha/memnex/main/examples/quickstart.mjs
+node quickstart.mjs
+```
+
+The example source is [`examples/v0.2/minimal.json`](./examples/v0.2/minimal.json), and the complete runnable script is [`examples/quickstart.mjs`](./examples/quickstart.mjs).
+
 The specification remains available below for implementers who need the full contract.
 
 Current version: v0.2 (May 2026). See [SPEC.md](./SPEC.md) for the full specification.
