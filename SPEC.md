@@ -96,7 +96,7 @@ The minimum valid document has `schema_version`, `meeting_id`, `generated_at`, `
 
 ### `schema_version`
 
-A semver string matching one of the published specification versions. The current version is `"0.1.0"`. Consumers **MUST** check this field before parsing and **MAY** refuse to process documents whose major version they do not understand.
+A semver string matching one of the published specification versions. The current version is `"0.2.0"`. Consumers **MUST** check this field before parsing and **MAY** refuse to process documents whose major version they do not understand.
 
 This field is duplicated by the schema's `$id` URL, but having it explicit in the document means tools that have never seen the URL can still detect the version.
 
